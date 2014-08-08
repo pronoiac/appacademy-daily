@@ -1,16 +1,18 @@
 def bubble_sort(arr)
   index = 0
   sorted = false
-  arr.length.times do  
+  # arr.length.times do 
+  until sorted == true
+    sorted = true
     index = 0
     # make one pass
     while index < arr.length - 1
-      p arr
+      # p arr
       if arr[index] > arr[index + 1]
         arr[index + 1], arr[index] = arr[index], arr[index + 1]
         sorted = false
       end
-      p sorted
+      # p sorted
       index += 1    
     end
   end
