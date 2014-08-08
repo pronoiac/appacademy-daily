@@ -1,4 +1,5 @@
 require "set"
+require "debugger"
 
 class WordChainer
   attr_reader :dictionary, :current_words, :all_seen_words
@@ -50,23 +51,39 @@ class WordChainer
           @new_current_words << adjacent
         end
       end
-      print "Step #{steps}, #{@new_current_words.count} new words, "
-      puts "#{all_seen_words.count} words total previously: \n"
-      #puts "#{@new_current_words}"
-      @all_seen_words.each do |to_word, from_word|
-        puts " #{to_word} <- #{from_word}"
-      end 
-      
-      puts
+      dump_status_list if $debug
       @current_words = @new_current_words
       steps += 1
     end
   end # /explore_current_words
-
+  
+  def dump_status_list
+    # print "Step #{@steps},
+    puts "#{@new_current_words.count} new words, "
+    puts "#{all_seen_words.count} words total previously: \n"
+    #puts "#{@new_current_words}"
+    @all_seen_words.each do |to_word, from_word|
+      puts " #{to_word} <- #{from_word}"
+    end 
+    puts
+  end
+  
+  def build_path(target)
+    path = []
+    current = target
+    while true do
+      # puts "#{current}"
+      path << current
+      current = @all_seen_words[current]
+      break if current.nil?
+    end
+    path.reverse
+  end # /build_path
   
 end
 
 def testing
+  # $debug = true
   chainer = WordChainer.new
   
   puts "Adjacent words for ruby"
@@ -79,9 +96,18 @@ def testing
   # p chainer.run "swam", "ruby"
   
   # puts "rows -> tail?"
-  puts "vent -> beam? (slow - 4 min?)"
+  # puts "vent -> beam? (slow - 4 min?)"
   # p chainer.run "vent", "beam"
-  p chainer.run "market", "harken"
+  
+  #p "market to toilet? (slow, 2 min?)"
+  #p chainer.run "market", "toilet"
+  
+  # debugger
+  #p chainer.build_path "toilet"
+  
+  puts "weather to heathen?"
+  p chainer.run "weather", "heathen"
+  p chainer.build_path "heathen"
   
   # p chainer.run "chunder", "plunder"
 end # /testing
