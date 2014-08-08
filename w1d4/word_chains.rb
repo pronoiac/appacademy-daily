@@ -10,7 +10,7 @@ class WordChainer
     # read dictionary into @dictionary, a set 
     File.foreach(dictionary_file) do |word|
       word.chomp!
-      dictionary << word
+      @dictionary << word
     end
   end 
   
@@ -33,6 +33,11 @@ class WordChainer
   def run(source, target)
     @current_words = [source]
     @all_seen_words = [source]
+    
+    explore_current_words(source)
+  end
+  
+  def explore_current_words(source)
     @new_current_words = []
     steps = 1
     until @current_words.empty? 
@@ -46,13 +51,13 @@ class WordChainer
         end
       end
       print "Step #{steps}, #{@new_current_words.count} new words, "
-      puts "#{current_words.count} words total previously: \n"
+      puts "#{all_seen_words.count} words total previously: \n"
       puts "#{@new_current_words}"
       puts
       @current_words = @new_current_words
       steps += 1
     end
-  end
+  end # /explore_current_words
 
   
 end
@@ -71,7 +76,8 @@ def testing
   
   # puts "rows -> tail?"
   puts "vent -> beam? (slow - 4 min?)"
-  p chainer.run "vent", "beam"
+  # p chainer.run "vent", "beam"
+  p chainer.run "market", "harken"
   
   # p chainer.run "chunder", "plunder"
 end # /testing
