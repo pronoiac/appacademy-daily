@@ -1,6 +1,7 @@
 require 'sqlite3'
 require 'singleton'
 require_relative 'users'
+require_relative 'questions'
 
 class QuestionsDatabase < SQLite3::Database
   include Singleton

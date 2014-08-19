@@ -1,5 +1,3 @@
-
-
 class User
   attr_reader :id, :fname, :lname
 
