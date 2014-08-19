@@ -13,7 +13,7 @@ CREATE TABLE questions (
     FOREIGN KEY (author_id) REFERENCES users(id)
 );
 
-CREATE TABLE followers (
+CREATE TABLE question_followers (
     id INTEGER PRIMARY KEY,
     question_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL, 
@@ -62,7 +62,7 @@ VALUES
 ;
 
 INSERT INTO
-    followers (id, question_id, user_id)
+    question_followers (id, question_id, user_id)
 VALUES
     -- follow own questions
     (1, 1, 1),

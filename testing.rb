@@ -57,8 +57,20 @@ def replies_testing
   p temp.first.parent_reply.child_replies
 end
 
+def followers_testing
+  puts "== followers testing =="
+  
+  puts "\n followers, Q1"
+  p QuestionFollower.followers_for_question_id(1)
+  
+  puts "\n Q followed, user 2"
+  p QuestionFollower.followed_questions_for_user_id(2)
+end
+
 # user_testing
 # puts "\n\n"
 # question_testing
 # puts "\n\n"
-replies_testing
+#replies_testing
+puts "\n\n"
+followers_testing
