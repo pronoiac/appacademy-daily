@@ -17,6 +17,9 @@ def user_testing
   
   puts "\nauthored replies"
   p sean.authored_replies
+  
+  puts "\nfollowed questions"
+  p sean.followed_questions
 end
 
 def question_testing
@@ -32,6 +35,9 @@ def question_testing
   
   puts "\nreplies"
   p best_question.replies
+  
+  puts "\n#followers"
+  p best_question.followers
 end
 
 def replies_testing
@@ -67,9 +73,9 @@ def followers_testing
   p QuestionFollower.followed_questions_for_user_id(2)
 end
 
-# user_testing
+user_testing
 # puts "\n\n"
-# question_testing
+question_testing
 # puts "\n\n"
 #replies_testing
 puts "\n\n"
