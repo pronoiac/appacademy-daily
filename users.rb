@@ -50,16 +50,7 @@ class User
   end
   
   def authored_replies
-    query = <<-SQL
-      SELECT
-          *
-      FROM
-          replies
-      WHERE
-          author_id = (?)
-    SQL
-  
-    QuestionsDatabase.instance.execute(query, @id)    
+    Reply.find_by_user_id(@id)  
   end
   
   

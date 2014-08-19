@@ -34,6 +34,31 @@ def question_testing
   p best_question.replies
 end
 
+def replies_testing
+  puts "== replies testing =="
+  
+  puts "\nfind by question id"
+  p Reply.find_by_question_id(1)
+  
+  puts "\nfind by user id"
+  temp = Reply.find_by_user_id(2)
+  p temp
+  
+  puts "\n#author"
+  p temp.first.author
+  
+  puts "\n#question"
+  p temp.first.question
+  
+  puts "\n#parent_reply"
+  p temp.first.parent_reply
+  
+  puts "\n#child_replies"
+  p temp.first.parent_reply.child_replies
+end
+
 # user_testing
 # puts "\n\n"
-question_testing
+# question_testing
+# puts "\n\n"
+replies_testing
