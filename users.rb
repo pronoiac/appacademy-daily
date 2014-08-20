@@ -55,7 +55,7 @@ class User
   def average_karma
     query = <<-SQL
         SELECT
-            total_questions / CAST(total_likes AS FLOAT) AS average_karma
+            COALESCE(total_questions / CAST(total_likes AS FLOAT), 0) AS average_karma
         FROM
             (SELECT
                 COUNT(DISTINCT(questions.id)) AS total_questions,
@@ -71,6 +71,7 @@ class User
                 questions.author_id = (?))
     SQL
     results = QuestionsDatabase.instance.execute(query, @id)
+    results.first["average_karma"]
   end
   
 end
