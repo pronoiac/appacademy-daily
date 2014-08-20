@@ -49,6 +49,10 @@ class Reply
     @body       = options['body']
   end
   
+  def table
+    "replies"
+  end
+  
   def author
     User.find_by_id(@author_id)
   end

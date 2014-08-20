@@ -110,7 +110,13 @@ def question_like_testing
   p QuestionLike.most_liked_questions(2)
 end
 
-user_testing
+def save_testing
+  puts "== save testing =="
+  td = User.new({'id' => nil, 'fname' => "Timothy", 'lname' => "Dalton"})
+  td.save
+end
+
+# user_testing
 # puts "\n\n"
 # question_testing
 # puts "\n\n"
@@ -119,3 +125,5 @@ user_testing
 # followers_testing
 # puts "\n\n"
 # question_like_testing
+# puts "\n\n"
+save_testing

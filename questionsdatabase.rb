@@ -1,5 +1,7 @@
+
 require 'sqlite3'
 require 'singleton'
+require_relative 'save' # ordering is important for this module.
 require_relative 'users'
 require_relative 'questions'
 require_relative 'replies'

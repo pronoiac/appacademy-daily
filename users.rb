@@ -1,4 +1,6 @@
 class User
+  include Save
+  
   attr_reader :id, :fname, :lname
 
   def self.find_by_id(id)
@@ -34,6 +36,10 @@ class User
     @id    = options['id']
     @fname = options['fname']
     @lname = options['lname']
+  end
+  
+  def table
+    "users"
   end
   
   def authored_questions
@@ -72,6 +78,10 @@ class User
     SQL
     results = QuestionsDatabase.instance.execute(query, @id)
     results.first["average_karma"]
+  end
+  
+  def save_form
+    ["nil", @fname, @lname]
   end
   
 end
