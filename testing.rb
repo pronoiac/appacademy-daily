@@ -20,6 +20,9 @@ def user_testing
   
   puts "\nfollowed questions"
   p sean.followed_questions
+  
+  puts "\nliked_questions"
+  p sean.liked_questions
 end
 
 def question_testing
@@ -38,6 +41,15 @@ def question_testing
   
   puts "\n#followers"
   p best_question.followers
+  
+  puts "\n#likers"
+  p best_question.likers
+  
+  puts "\n#num_likes"
+  p best_question.num_likes
+  
+  puts "\n::most_liked(1)"
+  p Question::most_liked(1)
 end
 
 def replies_testing
@@ -71,12 +83,35 @@ def followers_testing
   
   puts "\n Q followed, user 2"
   p QuestionFollower.followed_questions_for_user_id(2)
+  
+  puts "\n\n-- hard questions --"
+  
+  puts "\n::most_followed_questions(1)"
+  p QuestionFollower.most_followed_questions(1)
 end
 
-user_testing
+def question_like_testing
+  puts "== question_like testing =="
+  
+  puts "\n likers_for_question_id(1)"
+  p QuestionLike.likers_for_question_id(1)
+  
+  puts "\nnum_likes_for_question_id(1)"
+  p QuestionLike.num_likes_for_question_id(1)
+  
+  puts "\n::liked_questions_for_user_id(2)"
+  p QuestionLike.liked_questions_for_user_id(2)
+
+  puts "\n::most_liked(2) - note, only 1 Q has any likes"
+  p QuestionLike.most_liked_questions(2)
+end
+
+# user_testing
 # puts "\n\n"
 question_testing
 # puts "\n\n"
-#replies_testing
-puts "\n\n"
-followers_testing
+# replies_testing
+# puts "\n\n"
+# followers_testing
+# puts "\n\n"
+# question_like_testing

@@ -37,16 +37,17 @@ class User
   end
   
   def authored_questions
-    query = <<-SQL
-      SELECT
-          *
-      FROM
-          questions
-      WHERE
-          author_id = (?)
-    SQL
-    
-    QuestionsDatabase.instance.execute(query, @id)    
+    Question.find_by_author_id(@id)
+    # query = <<-SQL
+    #   SELECT
+    #       *
+    #   FROM
+    #       questions
+    #   WHERE
+    #       author_id = (?)
+    # SQL
+    #
+    # QuestionsDatabase.instance.execute(query, @id)
   end
   
   def authored_replies
@@ -55,7 +56,10 @@ class User
   
   def followed_questions
     QuestionFollower.followed_questions_for_user_id(@id)
-  end  
-    
+  end
+  
+  def liked_questions
+    QuestionLike.liked_questions_for_user_id(@id)
+  end
 end
 
