@@ -23,6 +23,10 @@ def user_testing
   
   puts "\nliked_questions"
   p sean.liked_questions
+  
+  puts "\n#average_karma (1, 2)"
+  p User.find_by_id(1).average_karma  
+  p sean.average_karma
 end
 
 def question_testing
@@ -106,9 +110,9 @@ def question_like_testing
   p QuestionLike.most_liked_questions(2)
 end
 
-# user_testing
+user_testing
 # puts "\n\n"
-question_testing
+# question_testing
 # puts "\n\n"
 # replies_testing
 # puts "\n\n"

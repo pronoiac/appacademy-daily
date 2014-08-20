@@ -38,16 +38,6 @@ class User
   
   def authored_questions
     Question.find_by_author_id(@id)
-    # query = <<-SQL
-    #   SELECT
-    #       *
-    #   FROM
-    #       questions
-    #   WHERE
-    #       author_id = (?)
-    # SQL
-    #
-    # QuestionsDatabase.instance.execute(query, @id)
   end
   
   def authored_replies
@@ -61,5 +51,27 @@ class User
   def liked_questions
     QuestionLike.liked_questions_for_user_id(@id)
   end
+  
+  def average_karma
+    query = <<-SQL
+        SELECT
+            total_questions / CAST(total_likes AS FLOAT) AS average_karma
+        FROM
+            (SELECT
+                COUNT(DISTINCT(questions.id)) AS total_questions,
+                COUNT(question_likes.id) AS total_likes
+                -- total_likes / total_questions AS average_karma
+            FROM
+                questions
+            LEFT OUTER JOIN
+                question_likes
+            ON
+                questions.id = question_likes.question_id
+            WHERE
+                questions.author_id = (?))
+    SQL
+    results = QuestionsDatabase.instance.execute(query, @id)
+  end
+  
 end
 
